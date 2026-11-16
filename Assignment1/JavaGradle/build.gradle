@@ -1,0 +1,45 @@
+plugins {
+    id 'application'
+}
+
+application {
+    mainClass = 'Multiply'
+}
+
+tasks.register('runApp', JavaExec) {
+    group = 'Multiply tasks'
+    description = 'Ejecuta Multiply con valores predeterminados'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'Multiply'
+    args '1', '2'
+}
+
+tasks.register('runAppAgain', JavaExec) {
+    group = 'Multiply tasks'
+    description = 'Ejecuta Multiply con parametros'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'Multiply'
+    args(
+        providers.gradleProperty('num1').getOrElse('1'),
+        providers.gradleProperty('num2').getOrElse('2')
+    )
+}
+
+tasks.register('runFraction', JavaExec) {
+    group = 'Fraction Tasks'
+    description = 'Ejecuta Fraction sin argumentos'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'Fraction'
+}
+
+tasks.register('runFrac', JavaExec) {
+    group = 'Fraction Tasks'
+    description = 'Ejecuta Fraction con argumentos opcionales'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'Fraction'
+
+    args(
+        providers.gradleProperty('num').getOrElse('1'),
+        providers.gradleProperty('denom').getOrElse('3')
+    )
+}
